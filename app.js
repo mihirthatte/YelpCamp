@@ -10,6 +10,11 @@ var campground = [
 		{ name: "Pokagon State Park", image:"http://www.photosforclass.com/download/pixabay-2788677"},
 		{ name: "Hardin Ridge Recreation Area", image:"http://www.photosforclass.com/download/pixabay-3111921"},
 		{ name: "McCormick's Creek State Park", image:"http://www.photosforclass.com/download/pixabay-2692058"},
+		{ name: "Turkey Run State Park", image:"http://www.photosforclass.com/download/pixabay-2513008"},
+		{ name: "Clifty Falls State Park", image:"http://www.photosforclass.com/download/pixabay-839807"},
+		{ name: "Pokagon State Park", image:"http://www.photosforclass.com/download/pixabay-2788677"},
+		{ name: "Hardin Ridge Recreation Area", image:"http://www.photosforclass.com/download/pixabay-3111921"},
+		{ name: "McCormick's Creek State Park", image:"http://www.photosforclass.com/download/pixabay-2692058"},
 		{ name: "Turkey Run State Park", image:"http://www.photosforclass.com/download/pixabay-2513008"}
 ];
 	
