@@ -1,10 +1,31 @@
 var express = require("express");
 var app = express();
 var bodyparser = require("body-parser");
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/YelpCamp");
 app.use(bodyparser.urlencoded({extended:true}));
 app.set('view engine', 'ejs')
 
+//Schema - 
+var camp_ground_schema = new mongoose.Schema({
+  name:String,
+  image:String
+});
+var Campground = mongoose.model("Campground", camp_ground_schema);
+//insert into DB - 
+// Campground.create(
+// 	{ name: "Pokagon State Park", image:"http://www.photosforclass.com/download/pixabay-2788677"},
+// 	function(err, camp){
+// 		if(err)
+// 			console.log(err);
+// 		else{
+// 			console.log("Campground created");
+// 			console.log(camp);
+// 		}
+// 	}
+// 	);
 
+/*
 var campground = [
 		{ name: "Clifty Falls State Park", image:"http://www.photosforclass.com/download/pixabay-839807"},
 		{ name: "Pokagon State Park", image:"http://www.photosforclass.com/download/pixabay-2788677"},
@@ -17,14 +38,20 @@ var campground = [
 		{ name: "McCormick's Creek State Park", image:"http://www.photosforclass.com/download/pixabay-2692058"},
 		{ name: "Turkey Run State Park", image:"http://www.photosforclass.com/download/pixabay-2513008"}
 ];
-	
+*/	
 app.get("/", function(req, res){
    res.render("landing");
 });
 
 app.get("/campgrounds", function(req, res){
-	res.render("campgrounds", {campground:campground});	
-
+	Campground.find({}, function(err, camp){
+		if(err)
+			console.log(err);
+		else{
+			res.render("campgrounds", {campground:camp});
+			console.log(camp);
+		}
+	});
 });
 
 app.get("/campgrounds/new", function(req, res){
@@ -33,11 +60,18 @@ app.get("/campgrounds/new", function(req, res){
 
 
 app.post("/campgrounds", function(req, res){
-	//get data from post request and add to campground array
 	var name = req.body.name;
 	var image = req.body.image;
-	campground.push({name:name, image:image});
-	res.redirect("/campgrounds")
+	//save to mongdb
+	Campground.create({name:name, image:image}, function(err, camp){
+		if(err)
+			console.log(err);
+		else{
+			console.log("New camp created");
+			res.redirect("/campgrounds")
+		}
+	});
+	
 });
 
 
